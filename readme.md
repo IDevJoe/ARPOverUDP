@@ -14,10 +14,11 @@ with the MAC address and interface from the host machine.
 
 ### Response is structured as follows
 
-hex: `[00 00 00 00 00 00] [01] [FF]`
-- Group 1: 6-byte MAC address; For this example, the decoded address is 00:00:00:00:00:00
-- Group 2: Interface name length
-- Group 3: Interface name
+hex: `[0A 00 00 01] [00 00 00 00 00 00] [01] [FF]`
+- Group 1: Requested IP
+- Group 2: 6-byte MAC address; For this example, the decoded address is 00:00:00:00:00:00
+- Group 3: Interface name length
+- Group 4: Interface name
 
 ## Contributing
 Contributions are always welcome. Fork the repository, make your changes, and create

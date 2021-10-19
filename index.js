@@ -35,13 +35,16 @@ socket.on('message', (msg, rinfo) => {
         socket.send("\0", rinfo.port, rinfo.address);
         return;
     }
-    let buff = Buffer.alloc(7 + entry.int.length);
+    let buff = Buffer.alloc(11 + entry.int.length);
     let splmac = entry.mac.split(':');
-    for(let i=0;i<6;i++) {
-        buff.writeUInt8(parseInt(splmac[i], 16), i);
+    for(let i=0;i<4;i++) {
+        buff.writeUInt8(addr[i], i)
     }
-    buff.writeUInt8(entry.int.length, 6);
-    buff.write(entry.int, 7, "utf8");
+    for(let i=0;i<6;i++) {
+        buff.writeUInt8(parseInt(splmac[i], 16), i+4);
+    }
+    buff.writeUInt8(entry.int.length, 10);
+    buff.write(entry.int, 11, "utf8");
     socket.send(buff, rinfo.port, rinfo.address);
 });
 
